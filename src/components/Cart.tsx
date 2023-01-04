@@ -1,11 +1,12 @@
 import React from 'react'
 import { useAppSelector, useAppDispatch } from "../store/reduxHooks";
 import currencyFormatter from 'currency-formatter'
-import { BsDash,BsPlus,BsReverseBackspaceReverse } from 'react-icons/bs';
+import { BsDash,BsPlus } from 'react-icons/bs';
+import {FaRegTrashAlt } from 'react-icons/fa';
 const Cart = () => {
-  const {products} = useAppSelector<any>(state => state.cart);
+  const {products,totalQuantities,totalPrice} = useAppSelector<any>(state => state.cart);
   const dispatch = useAppDispatch();
-   //console.log(products);
+  // console.log(totalPrice);
   return (
     <div className='cart'>
        <div className='container'> 
@@ -27,7 +28,7 @@ const Cart = () => {
                     <div className='row verticalAlign' key={product.id}>
                        <div className='col-2'>
                           <div className="cart__image">
-                            <img src={`/images/${product.image}`} alt="img"></img>
+                            <img src={`/images/${product.image}`} alt="img" ></img>
                           </div>
                        </div>
                        <div className="col-2">
@@ -40,7 +41,7 @@ const Cart = () => {
                            {currencyFormatter.format(product.discountprice, { code: 'USD' })}
                          </div>
                        </div>
-                       <div className="col-2">
+                       <div className="col-2 cart__incDec">
                             <button className="dec" onClick={()=> dispatch({type:'DEC',payload:product.id})}>-</button>
                             <button className="quntity">{product.quantity}</button>
                             <button className="inc" onClick={()=> dispatch({type:'INC',payload:product.id})} >+</button> 
@@ -51,16 +52,39 @@ const Cart = () => {
                          </div>
                        </div>
                        <div className="col-2">
-                          <div className="cart__remove">
-                          <BsReverseBackspaceReverse/>
+                          <div className="cart__remove"  onClick={()=> dispatch({type:'REMOVE',payload:product.id})}>
+                          <FaRegTrashAlt/>
                           </div>
                        </div>
                     </div>
                      
                   ))}
                </div>
-               <div className='col-3'>
-                  Summary
+               <div className='col-3 summary-col'>
+                  <div className="summary">
+                      <div className="summary__heading">
+                         Summary 
+                      </div>
+                      <div className="summary__details">
+                        <div className="row mb-10">
+                           <div className="col-6">
+                              Total Item: 
+                           </div>
+                           <div className="col-6">
+                              {totalQuantities}
+                           </div>
+                        </div>
+                        <div className="row mb-10">
+                           <div className="col-6">
+                              Total Price: 
+                           </div>
+                           <div className="col-6">
+                              {currencyFormatter.format(totalPrice, { code: 'USD' })}
+                           </div>
+                        </div>
+                        <button type='button' className='checkout'>checkout</button>
+                      </div>
+                  </div>
                </div>
              </div>
           

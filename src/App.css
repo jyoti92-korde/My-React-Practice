@@ -179,29 +179,120 @@ body{
    align-items: center;
    margin-top: 10px;
 }
-@media (max-width : 765px) {
+.cart__remove{
+  cursor: pointer;
+}
+.summary{
+  padding-left: 10px;
+}
+.summary__heading{
+  background: #f4f6f8;
+  padding-left: 10px;
+}
+.summary__details{
+  background: var(--main);
+  color: var(--white);
+  padding: 15px;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
+.checkout{
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: var(--white);
+  color: var(--main);
+  width:100%;
+  padding: 12px 5px;
+  font-size: 17px;
+  text-transform: uppercase ;
+}
+@media screen and (max-width : 765px) {
    .container{
     width : 100%;
     padding: 0 30px;
+    height: auto;
+    font-size: 10px;
    }
    .col-3{
-    width:50%;
+    width:86%;
+    height: auto;
+    font-size: 10px;
+   }
+   .col-2{
+    max-width:100%;
+    text-align: center;
+    height: auto;
+    font-size: 10px;
    }
    .col-6{
     width:100%;
+    height: auto;
+    font-size: 10px;
    }
+   .col-9{
+    width:100%;
+    height: auto;
+    font-size: 10px;
+   }  
    .details_image{
     padding-right: 0;
+    height: auto;
+    font-size: 10px;
+  }
+  .cart__heading{
+    display: none;
+    text-align: center;
+  }
+  .summary-col{
+    width: 100%!important;
+    height: auto;
+  }
+  .cart__incDec{
+    display: flex;
+    justify-content: center;
+  }
+  .cart h3{
+    text-align: center;
+  }
+  .cart__image img{
+    width: 100%;
+    height: auto;
+    
   }
 }
-@media (max-width : 400px) {
+@media screen and (max-width : 400px) {
   .col-3{
    width:100%;
+   height: auto;
+   font-size: 10px;
   }
+  .col-2{
+    max-width:100%;
+    height: auto;
+    font-size: 10px;
+   }
   .col-6{
    width:100%;
+   height: auto;
+   font-size: 10px;
   }
+   .col-9{
+    width:100%;
+    height: auto;
+    font-size: 10px;
+   }
   .details_image{
     padding-right: 0;
+  }
+  .cart__heading{
+    display: none;
+    text-align: center;
+  }
+  .summary-col{
+    width: 100%!important;
+    height: auto;
+    font-size: 10px;
   }
 }

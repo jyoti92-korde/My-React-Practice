@@ -14,6 +14,27 @@ const Home = () => {
   
   const newCart : any [] = [...cart];
 
+  const handleDeleteCart = (id:any) => {
+    //setProdId(id);
+    let quntity : HTMLElement | null = document.getElementById("quntity_"+id);
+    if(newCart.some((i)=> i['id']=== id)){
+       let itemIndex =newCart.findIndex((i)=> i['id']=== id);
+     
+      newCart[itemIndex]["count"]= cart[itemIndex]["count"]- 1;
+
+      if(quntity !=  null){
+        quntity.innerHTML = '<span>'+newCart[itemIndex]["count"]+'</span>';
+      }
+ 
+    }else {
+      newCart.push({id:id,count:1});
+
+      if(quntity !=  null){
+        quntity.innerHTML = '<span>1</span>';
+      }
+    }
+    setCart(newCart);
+  };
   const handleAddCart = (id:any) => {
     setProdId(id);
     let quntity : HTMLElement | null = document.getElementById("quntity_"+id);
@@ -34,7 +55,6 @@ const Home = () => {
       }
     }
     setCart(newCart);
-    //dispatch({type:'UPDATE_PRODUCT',payload:{id:id}})
   };
 
   let qunatities: HTMLElement | null  = document.getElementById("quntity_"+prod_id);
@@ -42,8 +62,8 @@ const Home = () => {
   if(qunatities != null){
     quantity = parseInt(qunatities.innerText);
   }
-  const add_to_cart = (product:any) =>{
-    dispatch({type:'ADD_TO_CART',payload:{product:product,quantity:quantity}})
+  const add_to_cart = (addproduct:any) =>{
+    dispatch({type:'ADD_TO_CART',payload:{product:addproduct,quantity:quantity}})
   }
 
 
@@ -55,11 +75,11 @@ const Home = () => {
           {products.map((product:any) => (
             <div className='col-3 m-5' key={product['id']}>
               <div className='product'>
-              <Link to={"/details/"+product.id}>
+              {/* <Link to={"/details/"+product.id}> */}
                 <div className='product__img' > 
                   <img src={`/images/${product.image}`} alt="image_name"></img>
                 </div>
-                </Link>
+                {/* </Link> */}
                 <div className='product__name'>
                   {product.name}
                 </div>
@@ -77,13 +97,13 @@ const Home = () => {
                 </div>
                 <div className='row inc__dec'>
                   <div className='col-6'>
-                    <button className="dec" >-</button>
+                    <button className="dec" onClick={()=>handleDeleteCart(product.id)} >-</button>
                     <button className="quntity" id={"quntity_"+product.id}><span id={"span_"+product.id}>0</span></button>
                      <button className="inc" onClick={()=>handleAddCart(product.id)}>+</button> 
                   </div>
                   <div className='col-6'>
                     <button className='add_card' onClick={()=>add_to_cart(product)}>
-                        Add to card
+                        Add to cart
                          </button>
                   </div>
                 </div>
