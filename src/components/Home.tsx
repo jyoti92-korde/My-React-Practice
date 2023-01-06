@@ -63,9 +63,7 @@ const Home = () => {
   if(qunatities != null){
     quantity = parseInt(qunatities.innerText);
   }
-  // const add_to_cart = (addproduct:any) =>{
-  //   dispatch({type:'ADD_TO_CART',payload:{product:addproduct,quantity:quantity}})
-  // }
+ 
   const add_to_cart = (addproduct:any) =>{
     const filteredObject = newCart.filter((element) => {
       return element.id === addproduct?.id;
