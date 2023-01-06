@@ -13,7 +13,7 @@ const CartReducer = (state = initState,action:any ) => {
             const {product,quantity} = action.payload;
             const check = state.products.find(prod => prod['id'] === product.id);
             if(check){
-               return state
+              return state
             } 
             else{
                     const total_price = state.totalPrice;
@@ -21,8 +21,9 @@ const CartReducer = (state = initState,action:any ) => {
                     const Tprice =  total_price  + product.discountprice * quantity;
                     const Tquantities = total_quantities + quantity;
                     product.quantity = quantity;
+                    
                     return{
-                        ...state, 
+                        ...state,   
                         products : [...state.products,product],
                         totalPrice: Tprice,
                         totalQuantities: Tquantities

@@ -8,7 +8,8 @@ import {Link} from "react-router-dom"
 const Home = () => {
   const dispatch = useAppDispatch();
   const {products} = useAppSelector(state => state.products);
-  //const [quantity, setQuantity] = useState(1);
+  // const {totalQuantities} = useAppSelector(state => state.cart);
+  // console.log('add_cart',totalQuantities);
   const [cart, setCart] = useState<any>([]);
   const [prod_id, setProdId] = useState(0);
   
@@ -62,10 +63,20 @@ const Home = () => {
   if(qunatities != null){
     quantity = parseInt(qunatities.innerText);
   }
+  // const add_to_cart = (addproduct:any) =>{
+  //   dispatch({type:'ADD_TO_CART',payload:{product:addproduct,quantity:quantity}})
+  // }
   const add_to_cart = (addproduct:any) =>{
-    dispatch({type:'ADD_TO_CART',payload:{product:addproduct,quantity:quantity}})
+    const filteredObject = newCart.filter((element) => {
+      return element.id === addproduct?.id;
+    });
+    if(filteredObject?.length) {
+      dispatch({type:'ADD_TO_CART',payload:{product:addproduct,quantity:filteredObject[0]?.count}})
+    }
+    else{
+      dispatch({type:'ADD_TO_CART',payload:{product:addproduct,quantity:1}})
+    }
   }
-
 
    return (
     <div>
