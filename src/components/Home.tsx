@@ -9,6 +9,7 @@ const Home = () => {
   const dispatch = useAppDispatch();
   const {products} = useAppSelector(state => state.products);
   // const {totalQuantities} = useAppSelector(state => state.cart);
+ 
   const [cart, setCart] = useState<any>([]);
   const [prod_id, setProdId] = useState(0);
   
